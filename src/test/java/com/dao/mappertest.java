@@ -13,7 +13,7 @@ public class mappertest {
     private UserMapper userMapper;
     @Test
     public void testdiscuss(){
-        discussPostMapper.selectDiscussPostRows(0);
+
 
     }
 }
