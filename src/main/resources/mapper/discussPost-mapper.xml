@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.DiscussPostMapper">
+        <sql id="selectFields">
+            id,user_id,title,content,type,status,create_time,comment_count,score
+        </sql>
+    <resultMap type="DiscussPost" id="DiscussPost">
+        <!-- 配置映射的订单信息 -->
+        <!-- id：指定查询列中的唯 一标识，订单信息的中的唯 一标识，如果有多个列组成唯一标识，配置多个id
+            column：订单信息的唯 一标识 列
+            property：订单信息的唯 一标识 列所映射到Orders中哪个属性
+          -->
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="type" property="type"/>
+        <result column="status" property="status"/>
+        <result column="comment_count" property="commentCount"/>
+        <result column="score" property="score"/>
+    </resultMap>
+    <select id="selectDiscussPosts" resultMap="DiscussPost">
+        select <include refid="selectFields"></include>
+        from discuss_post
+        where status != 2
+        <if test="userId!=0">
+            and user_id = #{userId}
+        </if>
+        order by type desc ,create_time desc
+        limit #{offset},#{limit}
+    </select>
+    <select id="selectDiscussPostRows" resultType="int">
+        select count(id)
+        from discuss_post
+        where status != 2
+        <if test="userId!=0">
+            and user_id = #{userId}
+        </if>
+    </select>
+</mapper>
