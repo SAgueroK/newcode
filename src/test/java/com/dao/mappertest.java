@@ -13,16 +13,7 @@ public class mappertest {
     private UserMapper userMapper;
     @Test
     public void testdiscuss(){
-        /*val user = new User();
-        user.setEmail("sdad");
-        user.setActivationCode("sdadsada");
-        user.setHeaderUrl("dsada");
-        user.setPassword("ddd");
-        user.setSalt("d");
-        user.setStatus(2);
-        user.setType(2);
-        user.setUsername("ddd");
-        userMapper.insertUser(user);*/
+
 
     }
 }
