@@ -1,6 +1,6 @@
 package com.dao;
 
-import com.domain.User;
+import com.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

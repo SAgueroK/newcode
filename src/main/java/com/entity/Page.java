@@ -1,4 +1,4 @@
-package com.domain;
+package com.entity;
 
 public class Page {
     //当前页

@@ -1,8 +1,8 @@
 package com.controller;
 
-import com.domain.DiscussPost;
-import com.domain.Page;
-import com.domain.User;
+import com.entity.DiscussPost;
+import com.entity.Page;
+import com.entity.User;
 import com.service.DiscussPostSevice;
 import com.service.UserSevice;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.service;
 
 import com.dao.DiscussPostMapper;
-import com.domain.DiscussPost;
+import com.entity.DiscussPost;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
