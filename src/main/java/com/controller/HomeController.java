@@ -36,8 +36,6 @@ public class HomeController {
                 User user = userSevice.findUserById(post.getUserId());
                 stringObjectMap.put("user",user);
                 mapList.add(stringObjectMap);
-                System.out.println(post);
-                System.out.println(user);
             }
         }
         model.addAttribute("discussPost",mapList);

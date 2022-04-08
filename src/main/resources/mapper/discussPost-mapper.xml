@@ -4,6 +4,9 @@
         <sql id="selectFields">
             id,user_id,title,content,type,status,create_time,comment_count,score
         </sql>
+        <sql id="insertFields">
+            user_id,title,content,type,status,create_time,comment_count,score
+        </sql>
     <resultMap type="DiscussPost" id="DiscussPost">
         <!-- 配置映射的订单信息 -->
         <!-- id：指定查询列中的唯 一标识，订单信息的中的唯 一标识，如果有多个列组成唯一标识，配置多个id
@@ -16,6 +19,7 @@
         <result column="content" property="content"/>
         <result column="type" property="type"/>
         <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
         <result column="comment_count" property="commentCount"/>
         <result column="score" property="score"/>
     </resultMap>
@@ -36,5 +40,15 @@
         <if test="userId!=0">
             and user_id = #{userId}
         </if>
+    </select>
+    <insert id="insertDiscussPost" parameterType="DiscussPost" useGeneratedKeys="true">
+        insert into discuss_post(<include refid="insertFields"/>) values(#{userId},#{title},#{content},#{type}
+        ,#{status},#{createTime},#{commentCount},#{score}
+        )
+    </insert>
+    <select id="selectDiscussPostById" resultType="DiscussPost">
+        select <include refid="selectFields"></include>
+        from discuss_post
+        where id=#{id}
     </select>
 </mapper>

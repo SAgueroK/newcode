@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class daomian {
     @Autowired
     private SensitiveFilter sensitiveFilter;
+
     @Test
     public void test(){
         sensitiveFilter.init();

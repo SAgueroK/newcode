@@ -1,5 +1,6 @@
 package com.dao;
 
+import com.entity.DiscussPost;
 import com.entity.LoginTicket;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,15 @@ public class mappertest {
     private LoginTicketMapper loginTicketMapper;
     @Test
     public void testdiscuss(){
-        LoginTicket loginTicket = new LoginTicket();
-        loginTicket.setTicket("dsdas");
-        loginTicket.setUserId(12);
-        loginTicket.setExpired(new Date());
-        loginTicket.setStatus(0);
-        loginTicketMapper.insertLoginTicket(loginTicket);
+        DiscussPost post =new DiscussPost();
+        post.setCreateTime(new Date());
+        post.setContent("dsad");
+        post.setTitle("dsa");
+        post.setUserId(12);
+        post.setScore(3);
+        post.setCommentCount(2);
+        post.setStatus(1);
+
+        discussPostMapper.insertDiscussPost(post);
     }
 }
