@@ -25,4 +25,13 @@ public interface CommunityConstant {
     *
     * */
     int REMEMBER_ME_EXPIRED_SECONDS=3600*24*100;
+
+    /*
+    * 帖子实体类型
+    * */
+    int ENTITY_TYPE_POST=1;
+    /*
+    * 评论实体类型
+    * */
+    int ENTITY_TYPE_COMMENT=2;
 }

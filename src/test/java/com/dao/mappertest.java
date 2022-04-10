@@ -16,17 +16,10 @@ public class mappertest {
     private UserMapper userMapper;
     @Autowired
     private LoginTicketMapper loginTicketMapper;
+    @Autowired
+    private MessageMapper messageMapper;
     @Test
     public void testdiscuss(){
-        DiscussPost post =new DiscussPost();
-        post.setCreateTime(new Date());
-        post.setContent("dsad");
-        post.setTitle("dsa");
-        post.setUserId(12);
-        post.setScore(3);
-        post.setCommentCount(2);
-        post.setStatus(1);
-
-        discussPostMapper.insertDiscussPost(post);
+        messageMapper.selectConversationCount(0);
     }
 }

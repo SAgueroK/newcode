@@ -27,7 +27,7 @@ public class HomeController {
     public String getIndexPage(Model model, Page page){
         page.setRows(discussPostSevice.findDiscussRows(0));
         page.setPath("/index");
-        List<DiscussPost> discussPostslist = discussPostSevice.findDiscussPost(0,page.getoffset(),page.getLimit());
+        List<DiscussPost> discussPostslist = discussPostSevice.findDiscussPost(0,page.getOffset(),page.getLimit());
         List<Map<String, Object>> mapList = new ArrayList<>();
         if(discussPostslist!=null){
             for(DiscussPost post : discussPostslist){
@@ -39,6 +39,14 @@ public class HomeController {
             }
         }
         model.addAttribute("discussPost",mapList);
+
         return "index";
     }
+    @RequestMapping(path = "/error",method = RequestMethod.GET)
+    public String getErrorPage(){
+        return "/error/500";
+    }
+
+
+
 }

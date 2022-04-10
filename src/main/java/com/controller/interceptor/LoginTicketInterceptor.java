@@ -2,6 +2,7 @@ package com.controller.interceptor;
 
 import com.entity.LoginTicket;
 import com.entity.User;
+import com.service.MessageService;
 import com.service.UserSevice;
 import com.util.CookieUil;
 import com.util.HostHolder;
@@ -23,6 +24,8 @@ public class LoginTicketInterceptor implements HandlerInterceptor {
     private UserSevice userSevice;
     @Autowired
     private HostHolder hostHolder;
+    @Autowired
+    private MessageService messageService;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //从coolkie中获得凭证
@@ -46,6 +49,7 @@ public class LoginTicketInterceptor implements HandlerInterceptor {
         User user = hostHolder.getUsers();
         if(user!=null&&modelAndView!=null){
             modelAndView.addObject("loginUser",user);
+            modelAndView.addObject("HeadUnreadCount",messageService.findLetterUnreadCount(user.getId(),null));
             System.out.println(user);
         }
     }

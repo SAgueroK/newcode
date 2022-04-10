@@ -147,4 +147,7 @@ public class UserSevice implements CommunityConstant{
     public int updataHeader(int userId,String headerUrl){
         return userMapper.updataHeardeUrl(userId,headerUrl);
     }
+    public User findUserByName(String username){
+        return userMapper.selectByName(username);
+    }
 }
