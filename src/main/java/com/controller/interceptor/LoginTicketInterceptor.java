@@ -46,7 +46,7 @@ public class LoginTicketInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        User user = hostHolder.getUsers();
+        User user = hostHolder.getUser();
         if(user!=null&&modelAndView!=null){
             modelAndView.addObject("loginUser",user);
             modelAndView.addObject("HeadUnreadCount",messageService.findLetterUnreadCount(user.getId(),null));

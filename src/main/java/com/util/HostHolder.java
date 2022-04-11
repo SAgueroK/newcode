@@ -12,7 +12,7 @@ public class HostHolder {
     public void setUsers(User user){
         users.set(user);
     }
-    public User getUsers(){
+    public User getUser(){
         return users.get();
     }
     public void clear(){

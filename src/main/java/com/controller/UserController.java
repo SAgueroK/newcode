@@ -2,6 +2,7 @@ package com.controller;
 
 import com.annotation.LoginRequired;
 import com.entity.User;
+import com.service.LikeService;
 import com.service.UserSevice;
 import com.util.HostHolder;
 import com.util.RandomUtil;
@@ -32,7 +33,8 @@ public class UserController {
     private String domain;
     @Value("${server.servlet.context-path}")
     private String context;
-
+    @Autowired
+    private LikeService likeService;
     @Autowired
     private HostHolder hostHolder;
     @LoginRequired
@@ -64,11 +66,12 @@ public class UserController {
             throw new RuntimeException("文件上传失败",e);
         }
         //跟新用户头像路径 http:localhost:8080/newcode/user/header/***.png
-        User user =hostHolder.getUsers();
+        User user =hostHolder.getUser();
         String headUrl = domain+context+"/user/header/"+fileName;
         userSevice.updataHeader(user.getId(),headUrl);
         return "redirect:/index";
     }
+    @LoginRequired
     @RequestMapping(path = "/header/{filename}",method = RequestMethod.GET)
     public void getHeader(@PathVariable("filename") String fileName, HttpServletResponse response){
         //服务器存放的路径
@@ -89,5 +92,19 @@ public class UserController {
         } catch (IOException e) {
             throw new RuntimeException("加载图片失败");
         }
+    }
+    @RequestMapping(path = "/profile/{userId}",method = RequestMethod.GET)
+    public String getProfilePage(@PathVariable("userId") int userId,Model model){
+        User user = userSevice.findUserById(userId);
+        if(user==null){
+            throw new IllegalArgumentException("该用户不存在");
+        }
+
+        //用户信息
+        model.addAttribute("user",user);
+        int likeCount = likeService.findUserLikeCount(userId);
+        model.addAttribute("likeCount",likeCount);
+        return "/site/profile";
+
     }
 }

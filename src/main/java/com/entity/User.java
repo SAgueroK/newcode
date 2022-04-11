@@ -20,7 +20,7 @@ public class User {
                 ", status=" + status +
                 ", activationCode='" + activationCode + '\'' +
                 ", headerUrl='" + headerUrl + '\'' +
-                ", creatTime=" + creatTime +
+                ", createTime=" + createTime +
                 '}';
     }
 
@@ -96,12 +96,12 @@ public class User {
         this.headerUrl = headerUrl;
     }
 
-    public Date getCreatTime() {
-        return creatTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
     public void setCreatTime(Date creatTime) {
-        this.creatTime = creatTime;
+        this.createTime = creatTime;
     }
 
     private String email;
@@ -109,5 +109,5 @@ public class User {
     private int status;
     private String activationCode;
     private String headerUrl;
-    private Date creatTime;
+    private Date createTime;
 }

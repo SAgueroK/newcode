@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.annotation.LoginRequired;
 import com.entity.Comment;
 import com.service.CommentService;
 import com.util.HostHolder;
@@ -19,10 +20,10 @@ public class CommentController {
     private CommentService commentService;
     @Autowired
     private HostHolder hostHolder;
-
+    @LoginRequired
     @RequestMapping(path = "/add/{discussPostId}",method = RequestMethod.POST)
     public String addComment(@PathVariable("discussPostId") int discussPostId, Comment comment){
-        comment.setUserId(hostHolder.getUsers().getId());
+        comment.setUserId(hostHolder.getUser().getId());
         comment.setStatus(1);
         comment.setCreateTime(new Date());
         commentService.addComment(comment);

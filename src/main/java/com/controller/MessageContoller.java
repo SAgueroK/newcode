@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.annotation.LoginRequired;
 import com.entity.Message;
 import com.entity.Page;
 import com.entity.User;
@@ -26,9 +27,10 @@ public class MessageContoller {
     @Autowired
     private UserSevice userSevice;
     //私信列表
+    @LoginRequired
     @RequestMapping(path = "/letter/list",method = RequestMethod.GET)
     public String getLetterList(Model model, Page page){
-        User user = hostHolder.getUsers();
+        User user = hostHolder.getUser();
         //设置分页
         page.setLimit(5);
         page.setPath("/letter/list");
@@ -55,6 +57,7 @@ public class MessageContoller {
 
         return "/site/letter";
     }
+    @LoginRequired
     @RequestMapping(path = "/letter/detail/{conversationId}",method = RequestMethod.GET)
     public String getLetterDetail(@PathVariable("conversationId") String conversationId,Page page,Model model){
         //分页设置
@@ -86,7 +89,7 @@ public class MessageContoller {
         List<Integer> ids = new ArrayList<>();
         if(letterList!=null){
             for(Message message:letterList){
-                if(hostHolder.getUsers().getId()==message.getToId()&&message.getStatus()==1){
+                if(hostHolder.getUser().getId()==message.getToId()&&message.getStatus()==1){
                     ids.add(message.getId());
                 }
             }
@@ -97,11 +100,11 @@ public class MessageContoller {
         String[] ids =conversationId.split("_");
         int id0=Integer.parseInt(ids[0]);
         int id1=Integer.parseInt(ids[1]);
-        if(hostHolder.getUsers().getId()==id0){
+        if(hostHolder.getUser().getId()==id0){
             return userSevice.findUserById(id1);
         }else return userSevice.findUserById(id0);
     }
-
+    @LoginRequired
     @RequestMapping(path = "/letter/send",method = RequestMethod.POST)
     @ResponseBody
     public String sendLetter(String toName,String content){
@@ -111,7 +114,7 @@ public class MessageContoller {
 
         }
         Message message = new Message();
-        message.setFromId(hostHolder.getUsers().getId());
+        message.setFromId(hostHolder.getUser().getId());
         message.setToId(target.getId());
         if(message.getFromId()<message.getToId()){
             message.setConversationId(message.getFromId()+"_"+message.getToId());
